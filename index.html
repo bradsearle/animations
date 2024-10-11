@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
+
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="test">
+      <div id="div1">
+        <div class="animate-text">This is animated text!</div>
+      </div>
+      <div id="div2">
+        <div class="animate-text2">This is animated text! two</div>
+      </div>
+    </div>
+  </body>
+
+  <script>
+    window.addEventListener("load", function () {
+      function ahref() {
+        document.getElementById("div1").style.display = "block"; // Shows the element by changing its display style
+      }
+      setTimeout(function () {
+        ahref();
+      }, 1000); // Delay the execution by 5 seconds
+    });
+
+    window.addEventListener("load", function () {
+      function ahref() {
+        document.getElementById("div2").style.display = "block"; // Shows the element by changing its display style
+      }
+      setTimeout(function () {
+        ahref();
+      }, 1000); // Delay the execution by 5 seconds
+    });
+  </script>
+</html>
