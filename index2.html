@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        height: 100vh;
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .test {
+        position: relative;
+        overflow: hidden;
+        height: 50px; /* Set to match the height of one line of text */
+        width: 400px;
+      }
+
+      #ticker-wrapper {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        animation: scrollUp 6s ease-in-out infinite;
+      }
+
+      .animate-text {
+        font-size: 14px;
+        font-weight: bold;
+        padding: 10px 0;
+      }
+
+      @keyframes scrollUp {
+        0% {
+          transform: translateY(0);
+        }
+        25% {
+          transform: translateY(0); /* First text remains in place */
+        }
+        50% {
+          transform: translateY(
+            -50px
+          ); /* Second text slides into the same position */
+        }
+        75% {
+          transform: translateY(
+            -100px
+          ); /* Third text slides into the same position */
+        }
+        100% {
+          transform: translateY(
+            -150px
+          ); /* Last line moves up into the same position */
+        }
+      }
+    </style>
+    <div class="test">
+      <div id="ticker-wrapper">
+        <div class="animate-text">This is animated text! two</div>
+        <div class="animate-text">This is animated text! three</div>
+      </div>
+    </div>
+  </body>
+</html>
