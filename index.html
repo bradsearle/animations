@@ -21,11 +21,20 @@
   <script>
     window.addEventListener("load", function () {
       function ahref() {
+        document.getElementById("div1").style.display = "block"; // Shows the element by changing its display style
+      }
+      setTimeout(function () {
+        ahref();
+      }, 3440); // Delay the execution by 5 seconds
+    });
+
+    window.addEventListener("load", function () {
+      function ahref() {
         document.getElementById("div2").style.display = "block"; // Shows the element by changing its display style
       }
       setTimeout(function () {
         ahref();
-      }, 2000); // Delay the execution by 5 seconds
+      }, 4000); // Delay the execution by 5 seconds
     });
   </script>
 </html>
