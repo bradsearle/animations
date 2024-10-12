@@ -9,32 +9,28 @@
   </head>
   <body>
     <div class="test">
-      <div id="div1">
-        <div class="animate-text">This is animated text!</div>
-      </div>
-      <div id="div2">
-        <div class="animate-text2">This is animated text! two</div>
-      </div>
+      <div id="text-display" class="animate-text">First Line</div>
     </div>
+
+    <script>
+      const lines = [
+        { text: "First Line", class: "animate-text" },
+        { text: "Second Line", class: "animate-text2" },
+      ];
+      let index = 0;
+
+      function swapText() {
+        const display = document.getElementById("text-display");
+
+        // Update text and class
+        index = (index + 1) % lines.length; // Toggle between 0 and 1
+        display.textContent = lines[index].text;
+        display.className = lines[index].class; // Change the class
+
+        setTimeout(swapText, 3000); // Call the function again after 3 seconds
+      }
+
+      setTimeout(swapText, 3000); // Start after 3 seconds
+    </script>
   </body>
-
-  <script>
-    window.addEventListener("load", function () {
-      function ahref() {
-        document.getElementById("div1").style.display = "block"; // Shows the element by changing its display style
-      }
-      setTimeout(function () {
-        ahref();
-      }, 3440); // Delay the execution by 5 seconds
-    });
-
-    window.addEventListener("load", function () {
-      function ahref() {
-        document.getElementById("div2").style.display = "block"; // Shows the element by changing its display style
-      }
-      setTimeout(function () {
-        ahref();
-      }, 4000); // Delay the execution by 5 seconds
-    });
-  </script>
 </html>
