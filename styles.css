@@ -8,29 +8,34 @@ body {
 }
 .test {
   position: absolute;
-  top: -11px;
+  top: -15px;
   width: 300px;
+}
+.center-n {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
 }
 .animate-text {
   top: 0px;
   position: absolute;
-  font-size: 13px;
-  font-weight: bold;
+  font-size: 14px;
   position: relative;
   opacity: 0;
   position: absolute;
   bottom: 0px;
-  animation: moveUpFadeIn 2.8s ease-in-out infinite;
+  animation: moveUpFadeIn 2.9s ease-in-out infinite;
 }
 .animate-text2 {
   top: 0px;
   position: absolute;
   font-size: 14px;
-  font-weight: bold;
+
   position: relative;
   opacity: 0;
   list-style-type: none;
-  animation: moveUpFadeIn2 2.8s ease-in-out infinite;
+  animation: moveUpFadeIn2 2.9s ease-in-out infinite;
   position: absolute;
 }
 
@@ -73,15 +78,4 @@ body {
     transform: translateY(0);
     opacity: 1;
   }
-}
-
-.first-line {
-  color: blue;
-  font-size: 24px;
-}
-
-.second-line {
-  color: green;
-  font-size: 28px;
-  font-style: italic;
 }
