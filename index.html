@@ -34,5 +34,53 @@
 
       setTimeout(swapText, 3000); // Start after 3 seconds
     </script>
+
+    <p>Get in order by: <span id="orderDate"></span></p>
+    <p>Shipping date: <span id="shippingDate"></span></p>
+
+    <script>
+      function updateDates() {
+        var currentTime = new Date();
+        var currentDay = currentTime.getDay(); // 0 = Sunday, 1 = Monday, ..., 6 = Saturday
+        var millisecondsInDay = 24 * 60 * 60 * 1000;
+
+        // Calculate next Sunday at 12:00 PM
+        var daysUntilSunday = (7 - currentDay) % 7;
+        var nextSunday = new Date(
+          currentTime.getTime() + daysUntilSunday * millisecondsInDay
+        );
+        nextSunday.setHours(12, 0, 0, 0);
+
+        // Calculate next Monday
+        var daysUntilMonday = (8 - currentDay) % 7;
+        var nextMonday = new Date(
+          currentTime.getTime() + daysUntilMonday * millisecondsInDay
+        );
+
+        // Update "get in order" date
+        var orderDate = document.getElementById("orderDate");
+        orderDate.textContent =
+          nextSunday.toLocaleDateString("en-US", {
+            weekday: "long",
+            // month: 'long',
+            // day: 'numeric'
+          }) + " at 4:00 PM";
+
+        // Update "shipping date"
+        var shippingDate = document.getElementById("shippingDate");
+        nextMonday.setDate(nextMonday.getDate() + 1); // Move to the following Monday
+        shippingDate.textContent = nextMonday.toLocaleDateString("en-US", {
+          weekday: "long",
+          month: "long",
+          day: "numeric",
+        });
+      }
+
+      // Call the function initially
+      updateDates();
+
+      // Update the dates every second
+      setInterval(updateDates, 1000);
+    </script>
   </body>
 </html>
