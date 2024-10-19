@@ -3,68 +3,66 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
     <title>Document</title>
   </head>
   <body>
     <style>
-      body {
-        font-family: Arial, sans-serif;
-        height: 100vh;
-        margin: 0;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-      }
-
-      .test {
-        position: relative;
-        overflow: hidden;
-        height: 50px; /* Set to match the height of one line of text */
-        width: 400px;
-      }
-
-      #ticker-wrapper {
-        display: flex;
-        flex-direction: column;
-        position: absolute;
-        animation: scrollUp 6s ease-in-out infinite;
-      }
-
-      .animate-text {
-        font-size: 14px;
+      .sunday-text {
+        color: blue;
         font-weight: bold;
-        padding: 10px 0;
       }
 
-      @keyframes scrollUp {
-        0% {
-          transform: translateY(0);
-        }
-        25% {
-          transform: translateY(0); /* First text remains in place */
-        }
-        50% {
-          transform: translateY(
-            -50px
-          ); /* Second text slides into the same position */
-        }
-        75% {
-          transform: translateY(
-            -100px
-          ); /* Third text slides into the same position */
-        }
-        100% {
-          transform: translateY(
-            -150px
-          ); /* Last line moves up into the same position */
-        }
+      .alternate-text {
+        color: green;
+        font-style: italic;
       }
     </style>
+
     <div class="test">
-      <div id="ticker-wrapper">
-        <div class="animate-text">This is animated text! two</div>
-        <div class="animate-text">This is animated text! three</div>
+      <div class="center-n">
+        <div id="textElement" data-alternate-text="free shipping"></div>
       </div>
     </div>
+
+    <script>
+      function getNextSunday() {
+        const today = new Date();
+        const dayOfWeek = today.getDay(); // 0 = Sunday, 1 = Monday, ..., 6 = Saturday
+
+        // Calculate the days left until the next Sunday
+        const daysUntilNextSunday = (7 - dayOfWeek) % 7;
+
+        // If today is Sunday, set it to the next Sunday (7 days later)
+        const nextSunday = new Date(today);
+        nextSunday.setDate(today.getDate() + (daysUntilNextSunday || 7));
+
+        // Format the date and prepend "Order by"
+        return `Order by ${nextSunday.toLocaleDateString("en-US", {
+          month: "long",
+          day: "numeric",
+        })}`;
+      }
+
+      function alternateText() {
+        const element = document.getElementById("textElement");
+        const alternateText = element.getAttribute("data-alternate-text");
+        let showSunday = true; // Toggle between Sunday and alternate text
+
+        setInterval(() => {
+          if (showSunday) {
+            element.textContent = getNextSunday(); // Display "Order by" + next Sunday
+            element.className = "animate-text"; // Assign class for Sunday
+          } else {
+            element.textContent = alternateText; // Display alternate text
+            element.className = "animate-text2"; // Assign class for alternate text
+          }
+          showSunday = !showSunday; // Toggle text on each interval
+        }, 3000); // Change text every 3 seconds
+      }
+
+      // Run the function on page load
+      window.onload = alternateText;
+    </script>
   </body>
 </html>
