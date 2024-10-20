@@ -26,33 +26,40 @@
     </div>
 
     <script>
-      function getNextSunday() {
+      function getNextSundayAndTuesday() {
         const today = new Date();
         const dayOfWeek = today.getDay(); // 0 = Sunday, 1 = Monday, ..., 6 = Saturday
 
-        // Calculate the days left until the next Sunday
+        // Calculate the days until the next Sunday
         const daysUntilNextSunday = (7 - dayOfWeek) % 7;
-
-        // If today is Sunday, set it to the next Sunday (7 days later)
         const nextSunday = new Date(today);
         nextSunday.setDate(today.getDate() + (daysUntilNextSunday || 7));
 
-        // Format the date and prepend "Order by"
-        return `Order by ${nextSunday.toLocaleDateString("en-US", {
-          month: "long",
-          day: "numeric",
-        })}`;
+        // Calculate the following Tuesday after that Sunday
+        const followingTuesday = new Date(nextSunday);
+        followingTuesday.setDate(nextSunday.getDate() + 2); // Add 2 days to Sunday
+
+        // Format the strings for display
+        const sundayText = `Order by 4 PM Sunday`; // No date for Sunday
+        const tuesdayText = `coming... ${followingTuesday.toLocaleDateString(
+          "en-US",
+          { month: "long", day: "numeric" }
+        )}`;
+
+        return { sundayText, tuesdayText };
       }
 
       function alternateText() {
         const element = document.getElementById("textElement");
         const alternateText = element.getAttribute("data-alternate-text");
-        let showSunday = true; // Toggle between Sunday and alternate text
+        let showSunday = true; // Toggle between Sunday message and alternate text
 
         setInterval(() => {
+          const { sundayText, tuesdayText } = getNextSundayAndTuesday();
+
           if (showSunday) {
-            element.textContent = getNextSunday(); // Display "Order by" + next Sunday
-            element.className = "animate-text"; // Assign class for Sunday
+            element.textContent = `${sundayText} & ${tuesdayText}`; // Display Sunday message and Tuesday date
+            element.className = "animate-text"; // Assign class for Sunday & Tuesday
           } else {
             element.textContent = alternateText; // Display alternate text
             element.className = "animate-text2"; // Assign class for alternate text
