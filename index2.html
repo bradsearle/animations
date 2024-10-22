@@ -21,7 +21,10 @@
 
     <div class="test">
       <div class="center-n">
-        <div id="textElement" data-alternate-text="free shipping"></div>
+        <div
+          id="textElement"
+          data-alternate-text="Free shipping over $80"
+        ></div>
       </div>
     </div>
 
@@ -36,9 +39,9 @@
         nextTuesday.setDate(today.getDate() + (daysUntilNextTuesday || 7));
 
         // Format the string for display
-        const tuesdayText = `Order by Sunday at 4pm Ship Tuesday ${nextTuesday.toLocaleDateString(
+        const tuesdayText = `Order by Sun 4 PM, ships Tue, ${nextTuesday.toLocaleDateString(
           "en-US",
-          { month: "long", day: "numeric" }
+          { month: "short", day: "numeric" }
         )}`;
 
         return { tuesdayText };
