@@ -9,7 +9,7 @@ body {
 .test {
   position: absolute;
   top: -15px;
-  width: 300px;
+  width: 400px;
 }
 .center-n {
   display: flex;

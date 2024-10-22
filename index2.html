@@ -26,46 +26,41 @@
     </div>
 
     <script>
-      function getNextSundayAndTuesday() {
+      function getNextTuesday() {
         const today = new Date();
         const dayOfWeek = today.getDay(); // 0 = Sunday, 1 = Monday, ..., 6 = Saturday
 
-        // Calculate the days until the next Sunday
-        const daysUntilNextSunday = (7 - dayOfWeek) % 7;
-        const nextSunday = new Date(today);
-        nextSunday.setDate(today.getDate() + (daysUntilNextSunday || 7));
+        // Calculate the days until the next Tuesday
+        const daysUntilNextTuesday = (9 - dayOfWeek) % 7; // 9 ensures Tuesday (2) calculation
+        const nextTuesday = new Date(today);
+        nextTuesday.setDate(today.getDate() + (daysUntilNextTuesday || 7));
 
-        // Calculate the following Tuesday after that Sunday
-        const followingTuesday = new Date(nextSunday);
-        followingTuesday.setDate(nextSunday.getDate() + 2); // Add 2 days to Sunday
-
-        // Format the strings for display
-        const sundayText = `Order by 4 PM Sunday`; // No date for Sunday
-        const tuesdayText = `coming... ${followingTuesday.toLocaleDateString(
+        // Format the string for display
+        const tuesdayText = `Order by Sunday at 4pm Ship Tuesday ${nextTuesday.toLocaleDateString(
           "en-US",
           { month: "long", day: "numeric" }
         )}`;
 
-        return { sundayText, tuesdayText };
+        return { tuesdayText };
       }
 
       function alternateText() {
         const element = document.getElementById("textElement");
         const alternateText = element.getAttribute("data-alternate-text");
-        let showSunday = true; // Toggle between Sunday message and alternate text
+        let showTuesday = true; // Toggle between Tuesday message and alternate text
 
         setInterval(() => {
-          const { sundayText, tuesdayText } = getNextSundayAndTuesday();
+          const { tuesdayText } = getNextTuesday();
 
-          if (showSunday) {
-            element.textContent = `${sundayText} & ${tuesdayText}`; // Display Sunday message and Tuesday date
-            element.className = "animate-text"; // Assign class for Sunday & Tuesday
+          if (showTuesday) {
+            element.textContent = tuesdayText; // Display Tuesday message
+            element.className = "animate-text"; // Assign class for Tuesday
           } else {
             element.textContent = alternateText; // Display alternate text
             element.className = "animate-text2"; // Assign class for alternate text
           }
-          showSunday = !showSunday; // Toggle text on each interval
-        }, 4000); // Change text every 3 seconds
+          showTuesday = !showTuesday; // Toggle text on each interval
+        }, 4000); // Change text every 4 seconds
       }
 
       // Run the function on page load
