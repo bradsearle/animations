@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Parallax Scrolling</title>
+    <style>
+      body,
+      html {
+        height: 100%;
+        margin: 0;
+      }
+
+      .parallax {
+        background-image: url("https://placehold.co/600x400");
+        min-height: 100%;
+        background-attachment: fixed;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+      }
+
+      .content {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: white;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="parallax"></div>
+
+    <div class="content">
+      <h1>Parallax Scrolling Demo</h1>
+      <p>Scroll down to see the effect.</p>
+    </div>
+
+    <script>
+      window.addEventListener("scroll", function () {
+        let parallax = document.querySelector(".parallax");
+        let scrollTop = window.pageYOffset;
+        parallax.style.backgroundPositionY = scrollTop * 0.5 + "px";
+      });
+    </script>
+  </body>
+</html>
